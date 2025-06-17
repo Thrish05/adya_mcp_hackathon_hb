@@ -6,7 +6,7 @@ import os
 import logging
 import time
 from typing import Optional, Dict, Any
-import pandas as pd
+# import pandas as pd
 from asyncio import Lock
 from hypercorn.asyncio import serve
 from hypercorn.config import Config

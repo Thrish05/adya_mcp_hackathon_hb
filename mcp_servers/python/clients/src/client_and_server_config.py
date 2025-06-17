@@ -13,5 +13,15 @@ ServersConfig = [
 			"run",
 			"mcp-gsuite"
 		]
+	},
+	{
+		"server_name": "DOCKERHUB",
+		"command":"uv",
+		"args": [
+			"--directory",
+			"../servers/DOCKERHUB/mcp-dockerhub",
+			"run",
+			"mcp-dockerhub"
+		]
 	}
 ]
