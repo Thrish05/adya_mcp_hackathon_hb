@@ -1,3 +1,0 @@
-"""
-DataRobot MCP Server package
-"""
