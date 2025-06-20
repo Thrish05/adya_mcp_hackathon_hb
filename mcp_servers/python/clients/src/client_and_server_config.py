@@ -41,5 +41,12 @@ ServersConfig = [
 			"run",
 			"mcp-custom"
 		]
-	}
+	},
+  {
+    "server_name": "QUICKBOOKS_ONLINE_MCP",
+    "command": "../servers/QUICKBOOKS_ONLINE_MCP/venv/Scripts/python.exe",
+    "args": [
+        "../servers/QUICKBOOKS_ONLINE_MCP/server.py"
+    ]
+}
 ]
