@@ -23,5 +23,23 @@ ServersConfig = [
 			"run",
 			"mcp-dockerhub"
 		]
+	},{
+		"server_name": "DATAROBOT",
+		"command":"uv",
+		"args": [
+			"--directory",
+			"../servers/DATAROBOT/mcp-datarobot",
+			"run",
+			"mcp-datarobot"
+		]
+	},{
+		"server_name": "CUSTOM",
+		"command":"uv",
+		"args": [
+			"--directory",
+			"../servers/CUSTOM/mcp-custom",
+			"run",
+			"mcp-custom"
+		]
 	}
 ]

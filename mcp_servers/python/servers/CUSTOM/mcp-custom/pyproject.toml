@@ -1,0 +1,22 @@
+[project]
+name = "mcp-custom"
+version = "0.1.0"
+description = "Custom MCP Server for Notion API"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "mcp[cli]>=1.9.4",
+    "requests>=2.31.0",
+    "python-dotenv>=1.0.0",
+    "fastmcp>=2.8.1"
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.scripts]
+mcp-custom = "mcp_custom.__main__:main"
+
+[tool.uv]
+package = true 

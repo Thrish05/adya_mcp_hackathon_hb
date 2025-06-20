@@ -83,12 +83,12 @@ def setup_oauth2(user_id: str):
     if not credentials:
         start_auth_flow(user_id=user_id)
     else:
-        # if credentials.access_token_expired:
-        #     logger.error("credentials expired. try refresh")
+        if credentials.access_token_expired:
+            logger.error("credentials expired. try refresh")
 
         # this call refreshes access token
         user_info = gauth.get_user_info(credentials=credentials)
-        #logging.error(f"User info: {json.dumps(user_info)}")
+        logging.error(f"User info: {json.dumps(user_info)}")
         gauth.store_credentials(credentials=credentials, user_id=user_id)
 
 
@@ -161,17 +161,17 @@ async def call_tool(name: str, arguments: Any) -> Sequence[TextContent | ImageCo
 
 async def main():
     # # print("Running main2")
-    # accounts = gauth.get_account_info()
-    # # print("account", accounts)
-    # for account in accounts:
-    #     # print("account", account)
-    #     creds = gauth.get_stored_credentials(user_id=account.email)
-    #     # print("creds", creds)
-    #     if creds:
-    #         logging.info(f"found credentials for {account.email}")
-    #     else:
-    #         #get_authorization_url
-    #         start_auth_flow(user_id=account.email)
+    accounts = gauth.get_account_info()
+    # print("account", accounts)
+    for account in accounts:
+        # print("account", account)
+        creds = gauth.get_stored_credentials(user_id=account.email)
+        # print("creds", creds)
+        if creds:
+            logging.info(f"found credentials for {account.email}")
+        else:
+            #get_authorization_url
+            start_auth_flow(user_id=account.email)
 
     # print("Running main3")
 

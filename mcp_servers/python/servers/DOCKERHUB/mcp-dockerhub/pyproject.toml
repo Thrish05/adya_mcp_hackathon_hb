@@ -1,0 +1,18 @@
+[project]
+name = "mcp-dockerhub"
+version = "0.1.0"
+description = "DockerHub MCP Server"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "mcp[cli]>=1.9.4",
+    "python-dotenv>=1.0.0",
+    "requests>=2.31.0"
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.scripts]
+mcp-dockerhub = "mcp_dockerhub.__main__:main"
