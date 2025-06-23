@@ -28,25 +28,28 @@ ServersConfig = [
 		"command":"uv",
 		"args": [
 			"--directory",
-			"../servers/DATAROBOT/mcp-datarobot",
+			"../servers/DATAROBOT/mcp_datarobot",
 			"run",
 			"mcp-datarobot"
 		]
 	},{
-		"server_name": "CUSTOM",
+		"server_name": "NOTION",
 		"command":"uv",
 		"args": [
 			"--directory",
-			"../servers/CUSTOM/mcp-custom",
+			"../servers/NOTION/mcp-notion",
 			"run",
-			"mcp-custom"
+			"mcp-notion"
 		]
 	},
-  {
-    "server_name": "QUICKBOOKS_ONLINE_MCP",
-    "command": "../servers/QUICKBOOKS_ONLINE_MCP/venv/Scripts/python.exe",
-    "args": [
-        "../servers/QUICKBOOKS_ONLINE_MCP/server.py"
-    ]
-}
+{
+		"server_name": "QUICKBOOKS",
+		"command":"uv",
+		"args": [
+			"--directory",
+			"../servers/QUICKBOOKS/mcp_quickbooks",
+			"run",
+			"mcp-quickbooks"
+		]
+	}
 ]
