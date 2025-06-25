@@ -951,17 +951,17 @@ async def call_and_execute_tool(
        and JSON-serializable output fallback."""
     
     # Debug prints
-    print(f"DEBUG: call_and_execute_tool - selected_server: {selected_server}")
-    print(f"DEBUG: call_and_execute_tool - credentials: {credentials}")
-    print(f"DEBUG: call_and_execute_tool - tool_name: {tool_name}")
-    print(f"DEBUG: call_and_execute_tool - args: {args}")
+    # print(f"DEBUG: call_and_execute_tool - selected_server: {selected_server}")
+    # print(f"DEBUG: call_and_execute_tool - credentials: {credentials}")
+    # print(f"DEBUG: call_and_execute_tool - tool_name: {tool_name}")
+    # print(f"DEBUG: call_and_execute_tool - args: {args}")
     
     if selected_server not in MCPServers:
         raise ValueError(f"Server {selected_server} not found in MCPServers")
     
     # pull per-server creds, defaulting to {}
     creds = credentials.get(selected_server, {})
-    print(f"DEBUG: call_and_execute_tool - creds for {selected_server}: {creds}")
+    # print(f"DEBUG: call_and_execute_tool - creds for {selected_server}: {creds}")
     
     # switch/case for injecting creds (Python 3.10+)
     match selected_server:
@@ -992,12 +992,12 @@ async def call_and_execute_tool(
         case _:
             pass
 
-    print(f"DEBUG: call_and_execute_tool - final args: {args}")
+    # print(f"DEBUG: call_and_execute_tool - final args: {args}")
 
-    # Debug: Check if server is available
-    print(f"DEBUG: Available servers in MCPServers: {list(MCPServers.keys())}")
-    print(f"DEBUG: Looking for server: {selected_server}")
-    print(f"DEBUG: Server found: {selected_server in MCPServers}")
+    # # Debug: Check if server is available
+    # print(f"DEBUG: Available servers in MCPServers: {list(MCPServers.keys())}")
+    # print(f"DEBUG: Looking for server: {selected_server}")
+    # print(f"DEBUG: Server found: {selected_server in MCPServers}")
 
     client = MCPServers[selected_server]
 

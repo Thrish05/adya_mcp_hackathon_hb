@@ -2,13 +2,13 @@
 
 ## 🎥 Demo Video
 
-- **MCP server setup explanation + API Execution + Features Testing**: [Watch Here](https://your-demo-video-link.com)
+- **MCP server setup explanation + API Execution + Features Testing**: [Watch Here](https://drive.google.com/file/d/1FztuhGoGgsyDLHxcb-4_ZJ0FAYhI8qHb/view?usp=drive_link)
 
 ---
 
 ## 🎥 Credentials Gathering Video
 
-- **Gathering Credentials & Setup(Full end - to - end video)**: [Watch Here](https://your-demo-video-link.com)
+- **Gathering Credentials & Setup(Full end - to - end video)**: [Watch Here](https://drive.google.com/file/d/1hfhZ_bf4E7AKdRHCz1wW0qf812t4oJvZ/view?usp=drive_link)
 
 ---
 
