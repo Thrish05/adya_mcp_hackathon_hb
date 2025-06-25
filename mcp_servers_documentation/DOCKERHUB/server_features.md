@@ -1,43 +1,53 @@
 # DOCKERHUB MCP Server Overview
 
 ## What is the DOCKERHUB MCP Server?
+
 The DOCKERHUB MCP Server is a connector within the Vanij Platform that enables seamless interaction with Docker Hub using the Docker Hub API v2.
 
 ---
 
 ## Key Features
-- ✅ List and manage Docker repositories
-- ✅ View repository tags and manifests
+
+- ✅ List Docker repositories for a user
+- ✅ List tags for a repository
 - ✅ Search public repositories
 - ✅ Get detailed repository information
-- ✅ Manage repository collaborators
-- ✅ Delete repositories with proper permissions
+- ✅ List repository collaborators
+- ✅ Get information about Docker Hub users
 
 ---
 
 ## Capabilities
-| Capability           | Description                                       |
-|----------------------|---------------------------------------------------|
-| Repository Management| List, view, and delete Docker repositories        |
-| Tag Management       | List tags and get manifests for repositories      |
-| Repository Search    | Search public repositories by query string        |
-| Repository Details   | Get comprehensive repository information          |
-| Access Control       | List and manage repository collaborators          |
-| User Information     | Get information about Docker Hub users            |
+
+| Capability           | Description                                |
+| -------------------- | ------------------------------------------ |
+| Repository Listing   | List repositories for a user               |
+| Tag Listing          | List tags for a repository                 |
+| Repository Search    | Search public repositories by query string |
+| Repository Details   | Get comprehensive repository information   |
+| Collaborator Listing | List collaborators for a repository        |
+| User Information     | Get information about Docker Hub users     |
 
 ---
 
 ## Supported Docker Hub Features
+
 - Docker Hub API v2
-- Repository management and operations
-- Tag and manifest retrieval
+- Repository listing and information retrieval
+- Tag listing
 - Public repository search
 - User information access
-- Collaborator management
+- Collaborator listing
+
+**Note:**
+
+- Delete, create, or update operations for repositories, tags, or collaborators are **not** implemented due to invalid endpoints (possibly deprecated).
+- Manifest retrieval and collaborator management (beyond listing) are **not** implemented due to invalid endpoints (possibly deprecated).
 
 ---
 
 ## Security Notes
+
 - Authenticated via **username and access token**
 - Basic authentication with username/token
 - All communications secured over HTTPS
@@ -46,9 +56,10 @@ The DOCKERHUB MCP Server is a connector within the Vanij Platform that enables s
 ---
 
 ## Integration Use Cases
-- Container registry management
-- CI/CD pipeline integration
-- Docker image lifecycle management
-- DevOps automation tools
-- Container orchestration platforms
-- Development workflow automation 
+
+- Container registry management (read-only)
+- CI/CD pipeline integration (read-only)
+- Docker image lifecycle management (read-only)
+- DevOps automation tools (read-only)
+- Container orchestration platforms (read-only)
+- Development workflow automation (read-only)

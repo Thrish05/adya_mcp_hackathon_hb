@@ -39,15 +39,7 @@ def main():
         resp.raise_for_status()
         return resp.json()
 
-    @mcp.tool()
-    def get_manifest(server_credentials: dict, repo: str, tag: str, username: Optional[str] = None) -> dict:
-        """Get manifest for a repository tag"""
-        creds = get_dockerhub_creds(server_credentials)
-        user = username or creds["username"]
-        url = f"https://hub.docker.com/v2/repositories/{user}/{repo}/manifests/{tag}/"
-        resp = requests.get(url, auth=(creds["username"], creds["token"]))
-        resp.raise_for_status()
-        return resp.json()
+
 
     @mcp.tool()
     def search_repositories(query: str) -> dict:
@@ -85,17 +77,6 @@ def main():
         resp.raise_for_status()
         return resp.json()
 
-    @mcp.tool()
-    def delete_repository(server_credentials: dict, repo: str, username: Optional[str] = None) -> dict:
-        """Delete a repository (requires appropriate permissions)"""
-        creds = get_dockerhub_creds(server_credentials)
-        user = username or creds["username"]
-        url = f"https://hub.docker.com/v2/repositories/{user}/{repo}/"
-        resp = requests.delete(url, auth=(creds["username"], creds["token"]))
-        if resp.status_code == 204:
-            return {"status": "deleted"}
-        resp.raise_for_status()
-        return resp.json()
 
     # Run the MCP server
     mcp.run(transport="stdio")
