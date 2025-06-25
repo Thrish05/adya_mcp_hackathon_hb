@@ -1,7 +1,8 @@
 {
     "selected_server_credentials": {
             "DATAROBOT": {
-            "api_key" : ""
+            "api_key" : "",
+            "file_path" : ""
         }
     },
     "client_details": {
