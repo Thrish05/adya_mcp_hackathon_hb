@@ -16,7 +16,7 @@ def validate_token(username, token):
     response = requests.get(url, headers=headers)
     return response.status_code == 200
 
-if not DOCKERHUB_TOKEN:
+if not DOCKERHUB_TOKEN and os.getenv("DOCKERHUB_USERNAME") and os.getenv("DOCKERHUB_PASS"):
     # Prompt user for credentials (do this securely in production)
     username = os.getenv("DOCKERHUB_USERNAME")
     password = os.getenv("DOCKERHUB_PASS")
