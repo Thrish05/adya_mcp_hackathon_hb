@@ -4,6 +4,7 @@ import requests
 from typing import List, Dict, Any, Optional
 from dotenv import load_dotenv, set_key
 import time
+
 load_dotenv()
 
 NOTION_TOKEN = os.getenv("NOTION_TOKEN")
@@ -22,10 +23,13 @@ def raise_if_error(response):
 # ------------------------ DATABASE TOOLS ------------------------
 
 @mcp.tool()
-def create_database(server_credentials: dict , parent_page_id: str, title: List[Dict], properties: Dict) -> Dict:
-    
+def create_database(*, server_credentials: dict = None, parent_page_id: str, title: List[Dict], properties: Dict) -> Dict:
+    if server_credentials is None:
+        token = NOTION_TOKEN
+    else:
+        token = server_credentials.get('api_key')
     HEADERS = {
-        "Authorization": f"Bearer {server_credentials.get('api_key')}",
+        "Authorization": f"Bearer {token}",
         "Notion-Version": "2022-06-28",
         "Content-Type": "application/json"
     }
@@ -40,9 +44,13 @@ def create_database(server_credentials: dict , parent_page_id: str, title: List[
     return response.json()
 
 @mcp.tool()
-def retrieve_database(server_credentials: dict, database_id: str) -> Dict:
+def retrieve_database(*,server_credentials: dict = None, database_id: str) -> Dict:
+    if server_credentials is None:
+        token = NOTION_TOKEN
+    else:
+        token = server_credentials.get('api_key')
     HEADERS = {
-        "Authorization": f"Bearer {server_credentials.get('api_key')}",
+        "Authorization": f"Bearer {token}",
         "Notion-Version": "2022-06-28",
         "Content-Type": "application/json"
     }
@@ -52,10 +60,14 @@ def retrieve_database(server_credentials: dict, database_id: str) -> Dict:
     return response.json()
 
 @mcp.tool()
-def query_database(server_credentials: dict, database_id: str, filters: Optional[Dict] = None,
+def query_database(*, server_credentials: dict = None, database_id: str, filters: Optional[Dict] = None,
                    sorts: Optional[List[Dict]] = None, page_size: int = 100) -> Dict:
+    if server_credentials is None:
+        token = NOTION_TOKEN
+    else:
+        token = server_credentials.get('api_key')
     HEADERS = {
-        "Authorization": f"Bearer {server_credentials.get('api_key')}",
+        "Authorization": f"Bearer {token}",
         "Notion-Version": "2022-06-28",
         "Content-Type": "application/json"
     }
@@ -73,10 +85,14 @@ def query_database(server_credentials: dict, database_id: str, filters: Optional
 # ------------------------ PAGE TOOLS ------------------------
 
 @mcp.tool()
-def create_page(server_credentials: dict, parent: Dict[str, Any], properties: Dict,
+def create_page(*, server_credentials: dict = None, parent: Dict[str, Any], properties: Dict,
                 children: Optional[List[Dict]] = None) -> Dict:
+    if server_credentials is None:
+        token = NOTION_TOKEN
+    else:
+        token = server_credentials.get('api_key')
     HEADERS = {
-        "Authorization": f"Bearer {server_credentials.get('api_key')}",
+        "Authorization": f"Bearer {token}",
         "Notion-Version": "2022-06-28",
         "Content-Type": "application/json"
     }
@@ -99,9 +115,13 @@ def create_page(server_credentials: dict, parent: Dict[str, Any], properties: Di
     return response.json()
 
 @mcp.tool()
-def retrieve_page(server_credentials: dict, page_id: str) -> Dict:
+def retrieve_page(*, server_credentials: dict = None, page_id: str) -> Dict:
+    if server_credentials is None:
+        token = NOTION_TOKEN
+    else:
+        token = server_credentials.get('api_key')
     HEADERS = {
-        "Authorization": f"Bearer {server_credentials.get('api_key')}",
+        "Authorization": f"Bearer {token}",
         "Notion-Version": "2022-06-28",
         "Content-Type": "application/json"
     }
@@ -111,9 +131,13 @@ def retrieve_page(server_credentials: dict, page_id: str) -> Dict:
     return response.json()
 
 @mcp.tool()
-def update_page(server_credentials: dict, page_id: str, properties: Dict) -> Dict:
+def update_page(*, server_credentials: dict = None, page_id: str, properties: Dict) -> Dict:
+    if server_credentials is None:
+        token = NOTION_TOKEN
+    else:
+        token = server_credentials.get('api_key')
     HEADERS = {
-        "Authorization": f"Bearer {server_credentials.get('api_key')}",
+        "Authorization": f"Bearer {token}",
         "Notion-Version": "2022-06-28",
         "Content-Type": "application/json"
     }
@@ -125,9 +149,13 @@ def update_page(server_credentials: dict, page_id: str, properties: Dict) -> Dic
     return response.json()
 
 @mcp.tool()
-def archive_page(server_credentials: dict, page_id: str) -> Dict:
+def archive_page(*, server_credentials: dict = None, page_id: str) -> Dict:
+    if server_credentials is None:
+        token = NOTION_TOKEN
+    else:
+        token = server_credentials.get('api_key')
     HEADERS = {
-        "Authorization": f"Bearer {server_credentials.get('api_key')}",
+        "Authorization": f"Bearer {token}",
         "Notion-Version": "2022-06-28",
         "Content-Type": "application/json"
     }
@@ -140,9 +168,13 @@ def archive_page(server_credentials: dict, page_id: str) -> Dict:
 # ------------------------ BLOCK TOOLS ------------------------
 
 @mcp.tool()
-def append_blocks(server_credentials: dict, page_id: str, blocks: List[Dict]) -> Dict:
+def append_blocks(*, server_credentials: dict = None, page_id: str, blocks: List[Dict]) -> Dict:
+    if server_credentials is None:
+        token = NOTION_TOKEN
+    else:
+        token = server_credentials.get('api_key')
     HEADERS = {
-        "Authorization": f"Bearer {server_credentials.get('api_key')}",
+        "Authorization": f"Bearer {token}",
         "Notion-Version": "2022-06-28",
         "Content-Type": "application/json"
     }
@@ -152,9 +184,13 @@ def append_blocks(server_credentials: dict, page_id: str, blocks: List[Dict]) ->
     return response.json()
 
 @mcp.tool()
-def retrieve_page_blocks(server_credentials: dict, page_id: str) -> Dict:
+def retrieve_page_blocks(*, server_credentials: dict = None, page_id: str) -> Dict:
+    if server_credentials is None:
+        token = NOTION_TOKEN
+    else:
+        token = server_credentials.get('api_key')
     HEADERS = {
-        "Authorization": f"Bearer {server_credentials.get('api_key')}",
+        "Authorization": f"Bearer {token}",
         "Notion-Version": "2022-06-28",
         "Content-Type": "application/json"
     }
@@ -164,9 +200,13 @@ def retrieve_page_blocks(server_credentials: dict, page_id: str) -> Dict:
     return response.json()
 
 @mcp.tool()
-def update_block(server_credentials: dict, block_id: str, new_text: str) -> Dict:
+def update_block(*, server_credentials: dict = None, block_id: str, new_text: str) -> Dict:
+    if server_credentials is None:
+        token = NOTION_TOKEN
+    else:
+        token = server_credentials.get('api_key')
     HEADERS = {
-        "Authorization": f"Bearer {server_credentials.get('api_key')}",
+        "Authorization": f"Bearer {token}",
         "Notion-Version": "2022-06-28",
         "Content-Type": "application/json"
     }
@@ -180,9 +220,13 @@ def update_block(server_credentials: dict, block_id: str, new_text: str) -> Dict
     return response.json()
 
 @mcp.tool()
-def delete_block(server_credentials: dict, block_id: str) -> Dict:
+def delete_block(*, server_credentials: dict = None, block_id: str) -> Dict:
+    if server_credentials is None:
+        token = NOTION_TOKEN
+    else:
+        token = server_credentials.get('api_key')
     HEADERS = {
-        "Authorization": f"Bearer {server_credentials.get('api_key')}",
+        "Authorization": f"Bearer {token}",
         "Notion-Version": "2022-06-28",
         "Content-Type": "application/json"
     }
@@ -195,25 +239,13 @@ def delete_block(server_credentials: dict, block_id: str) -> Dict:
 # ------------------------ ADVANCED TOOLS ------------------------
 
 @mcp.tool()
-def duplicate_page(server_credentials: dict, original_page_id: str, parent: Dict[str, Any]) -> Dict:
+def assign_user_property(*, server_credentials: dict = None, page_id: str, field_name: str, user_id: str) -> Dict:
+    if server_credentials is None:
+        token = NOTION_TOKEN
+    else:
+        token = server_credentials.get('api_key')
     HEADERS = {
-        "Authorization": f"Bearer {server_credentials.get('api_key')}",
-        "Notion-Version": "2022-06-28",
-        "Content-Type": "application/json"
-    }
-    original = retrieve_page(original_page_id)
-    blocks = retrieve_page_blocks(original_page_id)
-    new_page = create_page(
-        parent=parent,
-        properties=original.get("properties", {}),
-        children=blocks.get("results", [])
-    )
-    return new_page
-
-@mcp.tool()
-def assign_user_property(server_credentials: dict, page_id: str, field_name: str, user_id: str) -> Dict:
-    HEADERS = {
-        "Authorization": f"Bearer {server_credentials.get('api_key')}",
+        "Authorization": f"Bearer {token}",
         "Notion-Version": "2022-06-28",
         "Content-Type": "application/json"
     }
@@ -230,9 +262,13 @@ def assign_user_property(server_credentials: dict, page_id: str, field_name: str
     return response.json()
 
 @mcp.tool()
-def extract_page_summary(server_credentials: dict, page_id: str) -> str:
+def extract_page_summary(*, server_credentials: dict = None, page_id: str) -> str:
+    if server_credentials is None:
+        token = NOTION_TOKEN
+    else:
+        token = server_credentials.get('api_key')
     HEADERS = {
-        "Authorization": f"Bearer {server_credentials.get('api_key')}",
+        "Authorization": f"Bearer {token}",
         "Notion-Version": "2022-06-28",
         "Content-Type": "application/json"
     }
@@ -249,10 +285,14 @@ def extract_page_summary(server_credentials: dict, page_id: str) -> str:
 # ------------------------ SEARCH ------------------------
 
 @mcp.tool()
-def search(query: str = "", filter_dict: Optional[Dict] = None,
-           sort_dict: Optional[Dict] = None, page_size: int = 100, server_credentials: dict = None) -> Dict:
+def search(*, server_credentials: dict = None, query: str = "", filter_dict: Optional[Dict] = None,
+           sort_dict: Optional[Dict] = None, page_size: int = 100) -> Dict:
+    if server_credentials is None:
+        token = NOTION_TOKEN
+    else:
+        token = server_credentials.get('api_key')
     HEADERS = {
-        "Authorization": f"Bearer {server_credentials.get('api_key')}",
+        "Authorization": f"Bearer {token}",
         "Notion-Version": "2022-06-28",
         "Content-Type": "application/json"
     }
