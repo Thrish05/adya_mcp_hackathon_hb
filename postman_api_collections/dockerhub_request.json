@@ -1,8 +1,8 @@
 {
     "selected_server_credentials": {
             "DOCKERHUB": {
-            "dockerhub_username": "",
-            "dockerhub_token": ""
+            "username": "",
+            "token": ""
         }
     },
     "client_details": {
