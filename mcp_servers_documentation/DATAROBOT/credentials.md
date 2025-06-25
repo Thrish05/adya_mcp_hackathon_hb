@@ -9,7 +9,8 @@ This document provides instructions on obtaining and structuring the credentials
 ```json
 {
   "DATAROBOT": {
-    "api_key": "your-datarobot-api-key"
+    "api_key": "your-datarobot-api-key",
+    "file_path" : "absolute-path-to-file" #Optional
   }
 }
 ``` 
