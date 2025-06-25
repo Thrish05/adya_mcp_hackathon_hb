@@ -987,7 +987,7 @@ async def call_and_execute_tool(
             args["__credentials__"]   = creds
             args["server_credentials"] = creds
         case "DART":
-            args["__credentials__"]   = creds
+            # args["__credentials__"]   = creds
             args["server_credentials"] = creds
         case _:
             pass
