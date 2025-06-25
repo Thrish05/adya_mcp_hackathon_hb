@@ -1,0 +1,18 @@
+[project]
+name = "mcp-datarobot"
+version = "0.1.0"
+description = "DataRobot MCP Server"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "mcp[cli]",
+    "python-dotenv",
+    "requests"
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.scripts]
+mcp-datarobot = "mcp_datarobot.__main__:main" 

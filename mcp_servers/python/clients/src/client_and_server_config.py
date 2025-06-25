@@ -51,5 +51,15 @@ ServersConfig = [
 			"run",
 			"mcp-quickbooks"
 		]
+	},
+	{
+		"server_name": "DART",
+		"command":"uv",
+		"args": [
+			"--directory",
+			"../servers/DART/mcp_dart",
+			"run",
+			"mcp-dart"
+		]
 	}
 ]

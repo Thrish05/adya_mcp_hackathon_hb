@@ -1,0 +1,27 @@
+{
+    "selected_server_credentials": {
+            "DOCKERHUB": {
+            "dockerhub_username": "",
+            "dockerhub_token": ""
+        }
+    },
+    "client_details": {
+        "api_key": "",
+        "temperature": 0.1,
+        "max_token": 20000,
+        "input": "list my repos",
+        "input_type": "text",
+        "prompt": "you are a helpful assistant",
+        "chat_model": "gemini-2.0-flash",
+        "chat_history": [
+            {
+                "role": "user",
+                "content": "Hii"
+            }
+        ]
+    },
+    "selected_client": "MCP_CLIENT_GEMINI",
+    "selected_servers": [
+        "DOCKERHUB"
+    ]
+}

@@ -1,0 +1,2 @@
+[console_scripts]
+mcp-dart = mcp_dart.__main__:main

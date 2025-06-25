@@ -1,0 +1,17 @@
+[project]
+name = "mcp-dart"
+version = "0.1.0"
+description = "DART AI MCP Server"
+
+dependencies = [
+    "fastmcp>=2.8.1",
+    "requests",
+    "python-dotenv"
+]
+
+[project.scripts]
+mcp-dart = "mcp_dart.__main__:main"
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta" 

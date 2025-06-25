@@ -56,6 +56,13 @@ async def initialize_all_mcp(exit_stack):
             tools_response = await session.list_tools()
             tool_names = [tool.name for tool in tools_response.tools]
             print(f"Connected to {server['server_name']} with tools: {tool_names}")
+            
+            # Debug: Check if QuickBooks server is connected
+            if server["server_name"] == "QUICKBOOKS":
+                print(f"DEBUG: QuickBooks server connected successfully")
+                print(f"DEBUG: Available QuickBooks tools: {tool_names}")
+                print(f"DEBUG: QuickBooks session object: {session}")
+            
             print(f"\n================= Initializing {server['server_name']} mcp server end ===============")
 
         except Exception as err:

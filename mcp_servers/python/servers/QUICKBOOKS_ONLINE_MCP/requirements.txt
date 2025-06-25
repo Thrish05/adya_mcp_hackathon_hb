@@ -1,6 +1,0 @@
-python-dotenv
-python-quickbooks
-fastapi
-uvicorn
-mcp>=1.0.0  # Add MCP package
-requests    # Add requests package

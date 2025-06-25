@@ -141,11 +141,11 @@ async def call_tool(name: str, arguments: Any) -> Sequence[TextContent | ImageCo
         if not isinstance(arguments, dict):
             raise RuntimeError("arguments must be dictionary")
         
-        # if toolhandler.USER_ID_ARG not in arguments:
-        #     raise RuntimeError("user_id argument is missing in dictionary.")
+        if toolhandler.USER_ID_ARG not in arguments:
+            raise RuntimeError("user_id argument is missing in dictionary.")
 
-        # user_id = arguments.get(toolhandler.USER_ID_ARG, "")
-        # setup_oauth2(user_id=user_id)
+        user_id = arguments.get(toolhandler.USER_ID_ARG, "")
+        setup_oauth2(user_id=user_id)
         
 
         tool_handler = get_tool_handler(name)

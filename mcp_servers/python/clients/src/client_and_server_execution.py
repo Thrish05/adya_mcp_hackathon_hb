@@ -36,6 +36,21 @@ async def client_and_server_execution(payload: Dict[str, Any], streaming_callbac
         selected_servers = payload.get("selected_servers", [])
         selected_server = selected_servers[0] if selected_servers else ""
 
+        # Debug prints
+        print(f"DEBUG: ===== START OF EXECUTION =====")
+        print(f"DEBUG: Full payload keys: {list(payload.keys())}")
+        print(f"DEBUG: selected_server_credentials: {selected_server_credentials}")
+        print(f"DEBUG: selected_server_credentials type: {type(selected_server_credentials)}")
+        print(f"DEBUG: selected_server: {selected_server}")
+        print(f"DEBUG: selected_client: {selected_client}")
+        if selected_server_credentials and selected_server in selected_server_credentials:
+            print(f"DEBUG: QUICKBOOKS credentials: {selected_server_credentials.get(selected_server, {})}")
+            print(f"DEBUG: QUICKBOOKS credentials keys: {list(selected_server_credentials.get(selected_server, {}).keys())}")
+        else:
+            print(f"DEBUG: No credentials found for {selected_server}")
+            print(f"DEBUG: Available server keys: {list(selected_server_credentials.keys()) if selected_server_credentials else 'None'}")
+        print(f"DEBUG: ===== END OF INITIAL DEBUG =====")
+
         # Prepare chat history
         input_content = client_details.get("input", "")
         if "chat_history" in client_details:
@@ -105,7 +120,7 @@ async def client_and_server_execution(payload: Dict[str, Any], streaming_callbac
                     if matching_tool:
                         final_tool_calls.append(matching_tool)
 
-                client_details["prompt"] = temp_prompt
+                client_details["prompt"] = f"Use the available tools to respond to the user's request: {temp_prompt}. The server_credentials parameter is automatically provided and should not be included in your tool calls."
                 client_details["tools"] = final_tool_calls
                 
 
@@ -155,6 +170,12 @@ async def client_and_server_execution(payload: Dict[str, Any], streaming_callbac
                         tool_name = tool.get("function", {}).get("name")
                         args = json.loads(tool.get("function", {}).get("arguments", "{}"))
 
+                        print(f"DEBUG: ===== TOOL CALL DEBUG =====")
+                        print(f"DEBUG: Tool name: {tool_name}")
+                        print(f"DEBUG: Original args: {args}")
+                        print(f"DEBUG: Selected server: {selected_server}")
+                        print(f"DEBUG: Available credentials keys: {list(selected_server_credentials.keys()) if selected_server_credentials else 'None'}")
+                        print(f"DEBUG: Server credentials for {selected_server}: {selected_server_credentials.get(selected_server, {}) if selected_server_credentials else 'None'}")
 
                         if streaming_callback and streaming_callback.get("is_stream"):
                             await streaming_callback["streamCallbacks"].on_data(json.dumps({
@@ -166,6 +187,9 @@ async def client_and_server_execution(payload: Dict[str, Any], streaming_callbac
                             }))
 
                         tool_call_result = await call_and_execute_tool(selected_server, selected_server_credentials, tool_name, args)
+
+                        print(f"DEBUG: Tool call result: {tool_call_result}")
+                        print(f"DEBUG: ===== END TOOL CALL DEBUG =====")
 
                         if streaming_callback and streaming_callback.get("is_stream"):
                             await streaming_callback["streamCallbacks"].on_data(json.dumps({
@@ -230,7 +254,7 @@ async def client_and_server_execution(payload: Dict[str, Any], streaming_callbac
                         if matching_tool:
                             final_tool_calls.append(matching_tool)
 
-                    client_details["prompt"] = temp_prompt
+                    client_details["prompt"] = f"Use the available tools to respond to the user's request: {temp_prompt}. The server_credentials parameter is automatically provided and should not be included in your tool calls."
                     client_details["tools"] = final_tool_calls
 
                     while True:
@@ -346,7 +370,7 @@ async def client_and_server_execution(payload: Dict[str, Any], streaming_callbac
                     if matching_tool:
                         final_tool_calls.append(matching_tool)
 
-                client_details["prompt"] = temp_prompt
+                client_details["prompt"] = f"Use the available tools to respond to the user's request: {temp_prompt}. The server_credentials parameter is automatically provided and should not be included in your tool calls."
                 client_details["tools"] = final_tool_calls
                 
 
@@ -396,6 +420,12 @@ async def client_and_server_execution(payload: Dict[str, Any], streaming_callbac
                         tool_name = tool.get("function", {}).get("name")
                         args = json.loads(tool.get("function", {}).get("arguments", "{}"))
 
+                        print(f"DEBUG: ===== TOOL CALL DEBUG =====")
+                        print(f"DEBUG: Tool name: {tool_name}")
+                        print(f"DEBUG: Original args: {args}")
+                        print(f"DEBUG: Selected server: {selected_server}")
+                        print(f"DEBUG: Available credentials keys: {list(selected_server_credentials.keys()) if selected_server_credentials else 'None'}")
+                        print(f"DEBUG: Server credentials for {selected_server}: {selected_server_credentials.get(selected_server, {}) if selected_server_credentials else 'None'}")
 
                         if streaming_callback and streaming_callback.get("is_stream"):
                             await streaming_callback["streamCallbacks"].on_data(json.dumps({
@@ -407,6 +437,9 @@ async def client_and_server_execution(payload: Dict[str, Any], streaming_callbac
                             }))
 
                         tool_call_result = await call_and_execute_tool(selected_server, selected_server_credentials, tool_name, args)
+
+                        print(f"DEBUG: Tool call result: {tool_call_result}")
+                        print(f"DEBUG: ===== END TOOL CALL DEBUG =====")
 
                         if streaming_callback and streaming_callback.get("is_stream"):
                             await streaming_callback["streamCallbacks"].on_data(json.dumps({
@@ -471,7 +504,7 @@ async def client_and_server_execution(payload: Dict[str, Any], streaming_callbac
                         if matching_tool:
                             final_tool_calls.append(matching_tool)
 
-                    client_details["prompt"] = temp_prompt
+                    client_details["prompt"] = f"Use the available tools to respond to the user's request: {temp_prompt}. The server_credentials parameter is automatically provided and should not be included in your tool calls."
                     client_details["tools"] = final_tool_calls
 
                     while True:
@@ -588,7 +621,7 @@ async def client_and_server_execution(payload: Dict[str, Any], streaming_callbac
                     if matching_tool:
                         final_tool_calls.append(matching_tool)
 
-                client_details["prompt"] = temp_prompt
+                client_details["prompt"] = f"Use the available tools to respond to the user's request: {temp_prompt}. The server_credentials parameter is automatically provided and should not be included in your tool calls."
                 client_details["tools"] = final_tool_calls
              
 
@@ -662,6 +695,13 @@ async def client_and_server_execution(payload: Dict[str, Any], streaming_callbac
                         else:
                             args = args_raw
 
+                        print(f"DEBUG: ===== GEMINI TOOL CALL DEBUG =====")
+                        print(f"DEBUG: Tool name: {tool_name}")
+                        print(f"DEBUG: Original args: {args}")
+                        print(f"DEBUG: Selected server: {selected_server}")
+                        print(f"DEBUG: Available credentials keys: {list(selected_server_credentials.keys()) if selected_server_credentials else 'None'}")
+                        print(f"DEBUG: Server credentials for {selected_server}: {selected_server_credentials.get(selected_server, {}) if selected_server_credentials else 'None'}")
+
                         if streaming_callback and streaming_callback.get("is_stream"):
                             await streaming_callback["streamCallbacks"].on_data(json.dumps({
                                 "Data": f"{selected_server} MCP server {tool_name} call initiated",
@@ -673,6 +713,9 @@ async def client_and_server_execution(payload: Dict[str, Any], streaming_callbac
 
                         tool_call_result = await call_and_execute_tool(selected_server, selected_server_credentials, tool_name, args)
 
+                        print(f"DEBUG: Tool call result: {tool_call_result}")
+                        print(f"DEBUG: ===== END GEMINI TOOL CALL DEBUG =====")
+
                         if streaming_callback and streaming_callback.get("is_stream"):
                             await streaming_callback["streamCallbacks"].on_data(json.dumps({
                                 "Data": f"{selected_server} MCP server {tool_name} call result  : {json.dumps(tool_call_result)}",
@@ -681,7 +724,6 @@ async def client_and_server_execution(payload: Dict[str, Any], streaming_callbac
                                 "StreamingStatus": "IN-PROGRESS",
                                 "Action": "NOTIFICATION"
                             }))
-
 
                         result.Data["executed_tool_calls"].append({
                             "id": tool.get("id"),
@@ -745,7 +787,7 @@ async def client_and_server_execution(payload: Dict[str, Any], streaming_callbac
                         if matching_tool:
                             final_tool_calls.append(matching_tool)
 
-                    client_details["prompt"] = temp_prompt
+                    client_details["prompt"] = f"Use the available tools to respond to the user's request: {temp_prompt}. The server_credentials parameter is automatically provided and should not be included in your tool calls."
                     client_details["tools"] = final_tool_calls
 
                     count=1
@@ -816,6 +858,13 @@ async def client_and_server_execution(payload: Dict[str, Any], streaming_callbac
                             else:
                                 args = args_raw
 
+                            print(f"DEBUG: ===== GEMINI TOOL CALL DEBUG =====")
+                            print(f"DEBUG: Tool name: {tool_name}")
+                            print(f"DEBUG: Original args: {args}")
+                            print(f"DEBUG: Selected server: {selected_server}")
+                            print(f"DEBUG: Available credentials keys: {list(selected_server_credentials.keys()) if selected_server_credentials else 'None'}")
+                            print(f"DEBUG: Server credentials for {selected_server}: {selected_server_credentials.get(selected_server, {}) if selected_server_credentials else 'None'}")
+
                             if streaming_callback and streaming_callback.get("is_stream"):
                                 await streaming_callback["streamCallbacks"].on_data(json.dumps({
                                     "Data": f"{selected_server} MCP server {tool_name} call initiated",
@@ -827,6 +876,9 @@ async def client_and_server_execution(payload: Dict[str, Any], streaming_callbac
 
                             tool_call_result = await call_and_execute_tool(selected_server, selected_server_credentials, tool_name, args)
 
+                            print(f"DEBUG: Tool call result: {tool_call_result}")
+                            print(f"DEBUG: ===== END GEMINI TOOL CALL DEBUG =====")
+
                             if streaming_callback and streaming_callback.get("is_stream"):
                                 await streaming_callback["streamCallbacks"].on_data(json.dumps({
                                     "Data": f"{selected_server} MCP server {tool_name} call result  : {json.dumps(tool_call_result)}",
@@ -835,7 +887,6 @@ async def client_and_server_execution(payload: Dict[str, Any], streaming_callbac
                                     "StreamingStatus": "IN-PROGRESS",
                                     "Action": "NOTIFICATION"
                                 }))
-
 
                             result.Data["executed_tool_calls"].append({
                                 "id": tool.get("id"),
@@ -898,12 +949,20 @@ async def call_and_execute_tool(
 ) -> Any:
     """Call the MCP client tool with args and credentials, with JS-style try/catch
        and JSON-serializable output fallback."""
+    
+    # Debug prints
+    print(f"DEBUG: call_and_execute_tool - selected_server: {selected_server}")
+    print(f"DEBUG: call_and_execute_tool - credentials: {credentials}")
+    print(f"DEBUG: call_and_execute_tool - tool_name: {tool_name}")
+    print(f"DEBUG: call_and_execute_tool - args: {args}")
+    
     if selected_server not in MCPServers:
         raise ValueError(f"Server {selected_server} not found in MCPServers")
     
     # pull per-server creds, defaulting to {}
     creds = credentials.get(selected_server, {})
-
+    print(f"DEBUG: call_and_execute_tool - creds for {selected_server}: {creds}")
+    
     # switch/case for injecting creds (Python 3.10+)
     match selected_server:
         case "MCP-GSUITE":
@@ -915,8 +974,30 @@ async def call_and_execute_tool(
         case "FACEBOOK_ADS_MCP":
             args["__credentials__"]   = creds
             args["server_credentials"] = creds
+        case "DATAROBOT":
+            args["__credentials__"]   = creds
+            args["server_credentials"] = creds
+        case "QUICKBOOKS":
+            args["__credentials__"]   = creds
+            args["server_credentials"] = creds
+        case "DOCKERHUB":
+            args["__credentials__"]   = creds
+            args["server_credentials"] = creds
+        case "NOTION":
+            args["__credentials__"]   = creds
+            args["server_credentials"] = creds
+        case "DART":
+            args["__credentials__"]   = creds
+            args["server_credentials"] = creds
         case _:
             pass
+
+    print(f"DEBUG: call_and_execute_tool - final args: {args}")
+
+    # Debug: Check if server is available
+    print(f"DEBUG: Available servers in MCPServers: {list(MCPServers.keys())}")
+    print(f"DEBUG: Looking for server: {selected_server}")
+    print(f"DEBUG: Server found: {selected_server in MCPServers}")
 
     client = MCPServers[selected_server]
 

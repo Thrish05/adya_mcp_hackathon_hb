@@ -1,0 +1,3 @@
+"""
+QuickBooks MCP Server package
+""" 

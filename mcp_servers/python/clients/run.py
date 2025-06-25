@@ -71,8 +71,19 @@ async def process_message():
         if "client_details" in data:
             data["client_details"]["is_stream"] = False
         
-        # Validation check
-        validation_result = await client_and_server_validation(data, {"streamCallbacks": None, "is_stream": False})
+        # Extract credentials from request
+        credentials = data.get("selected_server_credentials", {})
+        # print(f"\n✅ ------------------------" , credentials)
+        # Validation check - pass credentials to validation
+        validation_result = await client_and_server_validation(
+            data, 
+            {
+                "streamCallbacks": None, 
+                "is_stream": False,
+                "credentials": credentials  # Pass credentials here
+            }
+        )
+        
         if not validation_result["status"]:
             return jsonify({
                 "Data": None,
@@ -81,12 +92,17 @@ async def process_message():
             }), 200
             
         print(f"\n✅ Validation Successful")
-        # print(validation_result)
-        print(f"\n✅ Execution Started")
         
-        # Execution
+        # Execution - pass credentials to execution
         generated_payload = validation_result["payload"]
-        execution_response = await client_and_server_execution(generated_payload, {"streamCallbacks": None, "is_stream": False})
+        execution_response = await client_and_server_execution(
+            generated_payload, 
+            {
+                "streamCallbacks": None, 
+                "is_stream": False,
+                "credentials": credentials  # Pass credentials here
+            }
+        )
         
         print(f"\n✅ Execution Completed")
         response_dict = {

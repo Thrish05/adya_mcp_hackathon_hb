@@ -1,0 +1,26 @@
+{
+    "selected_server_credentials": {
+        "DART": {
+            "api_key": "{add bearer token in auth}"
+        }
+    },
+    "client_details": {
+        "api_key": "",
+        "temperature": 0.1,
+        "max_token": 20000,
+        "input": "create a comment for task {task_id}: This is a sample comment created via Postman for Dart MCP.",
+        "input_type": "text",
+        "prompt": "you are a helpful assistant",
+        "chat_model": "gemini-2.0-flash",
+        "chat_history": [
+            {
+                "role": "user",
+                "content": "Hii"
+            }
+        ]
+    },
+    "selected_client": "MCP_CLIENT_GEMINI",
+    "selected_servers": [
+        "DART"
+    ]
+}
